@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import TopBanner from './TopBanner';
 import { Footer } from './Footer';
+import { useFetch } from './Utils';
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -39,7 +40,9 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const FrontPage: React.FC = () => {
+const HomePage: React.FC = () => {
+  const data = useFetch('https://evilfer.github.io/frontend-dev-api/data.json');
+  console.log(data);
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -56,7 +59,7 @@ const FrontPage: React.FC = () => {
               color="textPrimary"
               gutterBottom
             >
-              Album layout
+              Genetic PlaceHolder
             </Typography>
             <Typography
               variant="h5"
@@ -64,9 +67,7 @@ const FrontPage: React.FC = () => {
               color="textSecondary"
               paragraph
             >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+              Something short and sweet about genetics.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justifyContent="center">
@@ -125,4 +126,4 @@ const FrontPage: React.FC = () => {
   );
 };
 
-export default FrontPage;
+export default HomePage;
