@@ -1,15 +1,12 @@
 import {
-  Button,
-  CardActions,
   Typography,
   Card,
   CardMedia,
-  Grid,
   makeStyles,
   CardContent,
 } from '@material-ui/core';
 import React from 'react';
-import { GeneData } from './Utils';
+import { Features, GeneData } from './Utils';
 
 interface GeneCardProps {
   data: GeneData;
@@ -30,8 +27,17 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+    textAlign: 'left',
   },
 }));
+
+const handleFeatures = (features: Features): string => {
+  return (
+    '' +
+    (features.isDruggable ? 'Druggable' : 'Non-druggable') +
+    (features.isEnzyme ? ' enzyme' : ', non-enzyme')
+  );
+};
 
 /**
  * Visual card component displaying genetic data
@@ -39,33 +45,22 @@ const useStyles = makeStyles((theme) => ({
  */
 export const GeneCard: React.FC<GeneCardProps> = (props: GeneCardProps) => {
   const classes = useStyles();
-  const { id } = props.data;
+  const { image, shortName, features } = props.data;
   return (
-    <Grid item key={id} xs={12} sm={6} md={4}>
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.cardMedia}
-          image="https://source.unsplash.com/random"
-          title="Image title"
-        />
-        <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Heading
-          </Typography>
-          <Typography>
-            This is a media card. You can use this section to describe the
-            content.
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" color="primary">
-            View
-          </Button>
-          <Button size="small" color="primary">
-            Edit
-          </Button>
-        </CardActions>
-      </Card>
-    </Grid>
+    <Card className={classes.card} variant="elevation">
+      <CardMedia
+        className={classes.cardMedia}
+        image={image}
+        title={shortName}
+      />
+      <CardContent className={classes.cardContent}>
+        <Typography variant="h5" component="h2">
+          {shortName}
+        </Typography>
+        <Typography color="textSecondary">
+          {handleFeatures(features)}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };

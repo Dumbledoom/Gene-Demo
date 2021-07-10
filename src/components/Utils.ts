@@ -16,7 +16,7 @@ export interface GeneData {
   publications: [year: string, count: number][];
 }
 
-interface Features {
+export interface Features {
   isDruggable: boolean;
   isEnzyme: boolean;
 }

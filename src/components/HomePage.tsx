@@ -13,7 +13,7 @@ import { GeneCard } from './GeneCards';
 const useStyles = makeStyles((theme) => ({
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(8, 0, 0),
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -22,27 +22,13 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
 }));
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const HomePage: React.FC = () => {
   const data = useFetch('https://evilfer.github.io/frontend-dev-api/data.json');
-  console.log(data);
   const classes = useStyles();
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <TopBanner />
       <main>
@@ -56,7 +42,7 @@ const HomePage: React.FC = () => {
               color="textPrimary"
               gutterBottom
             >
-              Genetic PlaceHolder
+              Genenome Data
             </Typography>
             <Typography
               variant="h5"
@@ -64,35 +50,27 @@ const HomePage: React.FC = () => {
               color="textSecondary"
               paragraph
             >
-              Something short and sweet about genetics.
+              Click a gene for detailed information.
             </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
           </Container>
         </div>
-        <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {/*data?.map((gene) => <GeneCard data={gene} />))*/}
-          </Grid>
-        </Container>
+        {data && (
+          <Container className={classes.cardGrid} maxWidth="md">
+            {/* End hero unit */}
+            <Grid container spacing={4}>
+              {data?.map((gene) => (
+                <Grid key={gene.id} item xs={12} sm={6} md={4}>
+                  <GeneCard data={gene} />
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        )}
       </main>
       {/* Footer */}
       <Footer />
       {/* End footer */}
-    </React.Fragment>
+    </>
   );
 };
 
