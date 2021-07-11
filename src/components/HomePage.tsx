@@ -1,14 +1,17 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import TopBanner from './TopBanner';
 import { Footer } from './Footer';
-import { useFetch } from './Utils';
+import { GeneData } from './Utils';
 import { GeneCard } from './GeneCards';
+import { ButtonBase } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+
+interface HomeProps {
+  data: GeneData[];
+}
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -22,15 +25,19 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
+    width: '100%',
+    height: '100%',
+  },
 }));
 
-const HomePage: React.FC = () => {
-  const data = useFetch('https://evilfer.github.io/frontend-dev-api/data.json');
+const HomePage: React.FC<HomeProps> = (props: HomeProps) => {
+  const { data } = props;
   const classes = useStyles();
   return (
     <>
-      <CssBaseline />
-      <TopBanner />
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
@@ -60,7 +67,13 @@ const HomePage: React.FC = () => {
             <Grid container spacing={4}>
               {data?.map((gene) => (
                 <Grid key={gene.id} item xs={12} sm={6} md={4}>
-                  <GeneCard data={gene} />
+                  <ButtonBase
+                    className={classes.cardAction}
+                    component={Link}
+                    to={`/${gene.id}`}
+                  >
+                    <GeneCard data={gene} />
+                  </ButtonBase>
                 </Grid>
               ))}
             </Grid>

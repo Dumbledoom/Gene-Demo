@@ -1,13 +1,8 @@
 import React from 'react';
-import HomePage from './components/HomePage';
-import './App.css';
+import AppContainer from './components/AppContainer';
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <HomePage />
-    </div>
-  );
+  return <AppContainer />;
 };
 
 export default App;
