@@ -12,11 +12,7 @@ interface GeneCardProps {
   data: GeneData;
 }
 
-const useStyles = makeStyles((theme) => ({
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
+const useStyles = makeStyles(() => ({
   card: {
     height: '100%',
     display: 'flex',

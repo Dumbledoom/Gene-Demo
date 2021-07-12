@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import _ from 'lodash';
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -13,12 +13,17 @@ export interface GeneData {
   fullName: string;
   shortName: string;
   image: string;
-  publications: [year: string, count: number][];
+  publications: PublicationsPerYear[][];
 }
 
 export interface Features {
   isDruggable: boolean;
   isEnzyme: boolean;
+}
+
+export interface PublicationsPerYear {
+  year: string;
+  publications: number;
 }
 
 /**
