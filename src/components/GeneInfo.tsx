@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { GeneData } from './Utils';
+import { GeneData } from '../Utils';
 import DataTable from './DataTable';
 import PubGraph from './PubGraph';
 

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Footer } from './Footer';
-import { GeneData } from './Utils';
+import { GeneData } from '../Utils';
 import { GeneCard } from './GeneCards';
 import { ButtonBase } from '@material-ui/core';
 import { Link } from 'react-router-dom';

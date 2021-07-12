@@ -6,7 +6,7 @@ import {
   CardContent,
 } from '@material-ui/core';
 import React from 'react';
-import { Features, GeneData } from './Utils';
+import { Features, GeneData } from '../Utils';
 
 interface GeneCardProps {
   data: GeneData;

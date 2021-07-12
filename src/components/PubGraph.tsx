@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
-import { PublicationsPerYear } from './Utils';
+import { PublicationsPerYear } from '../Utils';
 
 interface PubGraphProps {
   pubData: PublicationsPerYear[][];
