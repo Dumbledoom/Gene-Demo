@@ -46,7 +46,7 @@ const HomePage: React.FC<HomeProps> = (props: HomeProps) => {
               color="textPrimary"
               gutterBottom
             >
-              Genenome Data
+              Genetic Demo
             </Typography>
             <Typography
               variant="h5"
@@ -54,7 +54,8 @@ const HomePage: React.FC<HomeProps> = (props: HomeProps) => {
               color="textSecondary"
               paragraph
             >
-              Click a gene for detailed information.
+              Click a gene for detailed information. Filter options available
+              above.
             </Typography>
           </Container>
         </div>

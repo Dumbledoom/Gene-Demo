@@ -10,22 +10,31 @@ const AppContainer: React.FC = () => {
   // Load data into the page on mount
   const data = useFetch('https://evilfer.github.io/frontend-dev-api/data.json');
   const { pathname } = useLocation();
-  const [isEnzyme, setIsEnzyme] = useState<boolean | null>(null);
-  const [isDruggable, setIsDruggable] = useState<boolean | null>(null);
+  const [isEnzyme, setIsEnzyme] = useState<string>('');
+  const [isDruggable, setIsDruggable] = useState<string>('');
+
+  /**
+   * Function that determines a boolean rule to filter genetic 'features'
+   * @param gene GeneData
+   * @returns Boolean
+   */
   const setFilterRule = (gene: GeneData) => {
-    if (!!isEnzyme && !!isDruggable) {
+    // If both filters are set, return a union of the state variables
+    if (isEnzyme !== '' && isDruggable !== '') {
       return (
-        gene.features.isDruggable === isDruggable &&
-        gene.features.isEnzyme === isEnzyme
+        String(gene.features.isDruggable) === isDruggable &&
+        String(gene.features.isEnzyme) === isEnzyme
       );
-    } else if (!!isEnzyme || !!isDruggable) {
-      return (
-        gene.features.isDruggable === isDruggable &&
-        gene.features.isEnzyme === isEnzyme
-      );
+      // if only one filter is set, return only that rule
+    } else if (isEnzyme !== '' || isDruggable !== '') {
+      return isEnzyme !== ''
+        ? String(gene.features.isEnzyme) === isEnzyme
+        : String(gene.features.isDruggable) === isDruggable;
     }
-    return undefined;
+    // if no filter are set, return true for everything in the data
+    return true;
   };
+
   return (
     <>
       <CssBaseline />
@@ -33,12 +42,14 @@ const AppContainer: React.FC = () => {
         enzymeFilter={setIsEnzyme}
         druggableFilter={setIsDruggable}
         isEnzyme={String(isEnzyme)}
-        isdruggable={String(isDruggable)}
+        isDruggable={String(isDruggable)}
       />
-      {pathname === '/' && <HomePage data={data} />}
+      {pathname === '/' && (
+        <HomePage data={data.filter((gene) => setFilterRule(gene))} />
+      )}
       <Switch>
         {data
-          ?.filter((gene) => setFilterRule(gene))
+          .filter((gene) => setFilterRule(gene))
           .map((gene) => (
             <Route
               key={gene.id}

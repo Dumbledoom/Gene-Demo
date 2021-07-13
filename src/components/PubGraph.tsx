@@ -7,7 +7,6 @@ interface PubGraphProps {
 }
 
 const PubGraph: React.FC<PubGraphProps> = (props: PubGraphProps) => {
-  console.log(props);
   return (
     <Chart
       chartType="Bar"

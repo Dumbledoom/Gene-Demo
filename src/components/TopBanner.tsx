@@ -6,15 +6,15 @@ import {
   Typography,
   Select,
 } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 
 interface TopBannerProps {
-  enzymeFilter: (value: boolean | null) => void;
-  druggableFilter: (value: boolean | null) => void;
+  enzymeFilter: (value: string) => void;
+  druggableFilter: (value: string) => void;
   isEnzyme: string;
-  isdruggable: string;
+  isDruggable: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -25,14 +25,15 @@ const useStyles = makeStyles((theme) => ({
 
 const TopBanner: React.FC<TopBannerProps> = (props: TopBannerProps) => {
   const classes = useStyles();
+  const location = useLocation();
   const history = useHistory();
   const handleEnzymeChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    props.enzymeFilter(Boolean(event.target.value));
+    props.enzymeFilter(String(event.target.value));
   };
   const handleDruggableChange = (
     event: React.ChangeEvent<{ value: unknown }>,
   ) => {
-    props.druggableFilter(Boolean(event.target.value));
+    props.druggableFilter(String(event.target.value));
   };
 
   return (
@@ -47,33 +48,44 @@ const TopBanner: React.FC<TopBannerProps> = (props: TopBannerProps) => {
         >
           <HomeIcon />
         </IconButton>
-        <Typography variant="h6" color="inherit" noWrap>
-          Genetic Demo
-        </Typography>
-        <Select
-          native
-          onChange={handleEnzymeChange}
-          value={props.isEnzyme}
-          inputProps={{
-            name: 'Enzyme Filter',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={'true'}>Enzyme</option>
-          <option value={'false'}>Non-enzyme</option>
-        </Select>
-        <Select
-          native
-          onChange={handleDruggableChange}
-          value={props.isEnzyme}
-          inputProps={{
-            name: 'Druggable Filter',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={'true'}>Druggable</option>
-          <option value={'false'}>Not druggable</option>
-        </Select>
+        &nbsp;
+        {location.pathname === '/' ? (
+          <>
+            <Typography variant="h6" color="inherit" noWrap>
+              Filters:
+            </Typography>
+            &nbsp;
+            <Select
+              native
+              onChange={handleEnzymeChange}
+              value={props.isEnzyme}
+              inputProps={{
+                name: 'Enzyme Filter',
+              }}
+            >
+              <option aria-label="None" value="" label="None" />
+              <option value={'true'}>Enzyme</option>
+              <option value={'false'}>Non-enzyme</option>
+            </Select>
+            &nbsp;
+            <Select
+              native
+              onChange={handleDruggableChange}
+              value={props.isDruggable}
+              inputProps={{
+                name: 'Druggable Filter',
+              }}
+            >
+              <option aria-label="None" value="" label="None" />
+              <option value={'true'}>Druggable</option>
+              <option value={'false'}>Not druggable</option>
+            </Select>
+          </>
+        ) : (
+          <Typography variant="h6" color="inherit" noWrap>
+            Details
+          </Typography>
+        )}
       </Toolbar>
     </AppBar>
   );
