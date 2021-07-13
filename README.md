@@ -1,12 +1,19 @@
-# Getting Started 
+# Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 It is a short demonstration application designed to illustrate the capabilities of the core packages.
+
+## About
+
+This demo is built with Typescript React, Material UI, React Google Charts and a set of genetic test data.
+The data is shown in a filterable list, and clicking on a items will show details about the selected gene.
 
 ## Requirements
 
 - Node.js
 - Yarn
+
+To install, clone the repository and run 'yarn' inside the top level directory. This will install all packages needed to run the project.
 
 ## Available Scripts
 
@@ -21,6 +28,8 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `yarn test`
+
+- At present no tests exist for this project.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
