@@ -3,7 +3,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Footer } from './Footer';
 import { GeneData } from '../Utils';
 import { GeneCard } from './GeneCards';
 import { ButtonBase } from '@material-ui/core';
@@ -36,7 +35,6 @@ const HomePage: React.FC<HomeProps> = (props: HomeProps) => {
   return (
     <>
       <main>
-        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
@@ -61,7 +59,6 @@ const HomePage: React.FC<HomeProps> = (props: HomeProps) => {
         </div>
         {data && (
           <Container className={classes.cardGrid} maxWidth="md">
-            {/* End hero unit */}
             <Grid container spacing={4}>
               {data?.map((gene) => (
                 <Grid key={gene.id} item xs={12} sm={6} md={4}>
@@ -78,9 +75,6 @@ const HomePage: React.FC<HomeProps> = (props: HomeProps) => {
           </Container>
         )}
       </main>
-      {/* Footer */}
-      <Footer />
-      {/* End footer */}
     </>
   );
 };

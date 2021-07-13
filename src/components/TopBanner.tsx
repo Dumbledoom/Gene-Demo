@@ -27,6 +27,8 @@ const TopBanner: React.FC<TopBannerProps> = (props: TopBannerProps) => {
   const classes = useStyles();
   const location = useLocation();
   const history = useHistory();
+
+  // Change handlers set the filter state in AppContainer.tsx
   const handleEnzymeChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     props.enzymeFilter(String(event.target.value));
   };

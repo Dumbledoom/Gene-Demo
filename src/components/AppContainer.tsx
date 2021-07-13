@@ -10,6 +10,8 @@ const AppContainer: React.FC = () => {
   // Load data into the page on mount
   const data = useFetch('https://evilfer.github.io/frontend-dev-api/data.json');
   const { pathname } = useLocation();
+
+  // State variables manage filter settings, TopBanner.tsx is controlled by these
   const [isEnzyme, setIsEnzyme] = useState<string>('');
   const [isDruggable, setIsDruggable] = useState<string>('');
 
